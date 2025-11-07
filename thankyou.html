@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You - Celebrazo Events</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #d63384 0%, #6f42c1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .thank-you-container {
+      text-align: center;
+      padding: 4rem 2rem;
+      max-width: 600px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .success-icon {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 3rem;
+      animation: scaleIn 0.6s ease 0.3s both;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .success-icon i {
+      font-size: 5rem;
+      color: #d63384;
+      animation: checkmark 0.8s ease 0.8s both;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4rem;
+      color: white;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease 0.5s both;
+    }
+
+    p {
+      font-size: 1.8rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease 0.7s both;
+    }
+
+    .btn-home {
+      display: inline-block;
+      padding: 1.5rem 3rem;
+      background: white;
+      color: #d63384;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease 0.9s both;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      animation: confetti-fall 3s linear infinite;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes checkmark {
+      0% {
+        transform: scale(0) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(180deg);
+      }
+      100% {
+        transform: scale(1) rotate(360deg);
+      }
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.6rem;
+      }
+      .success-icon {
+        width: 100px;
+        height: 100px;
+      }
+      .success-icon i {
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-container">
+    <div class="success-icon">
+      <i class="fas fa-check"></i>
+    </div>
+    <h1>Thank You!</h1>
+    <p>We've received your inquiry and our team will get back to you within 24 hours. We're excited to help make your event unforgettable!</p>
+    <a href="index.html" class="btn-home">Back to Home</a>
+  </div>
+
+  <script>
+    // Create confetti
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.animationDelay = Math.random() * 3 + 's';
+      confetti.style.background = ['#d63384', '#6f42c1', '#ffffff', '#ffd700'][Math.floor(Math.random() * 4)];
+      document.body.appendChild(confetti);
+    }
+  </script>
+</body>
+</html>

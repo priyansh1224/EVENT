@@ -45,15 +45,24 @@
 }
 
 .app-link {
-  display: inline-block;
-  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
 }
 
 .app-link img {
-  height: 100%;
-  width: auto;
+  height: 28px !important;
+  width: auto !important;
+  max-height: 28px !important;
   display: block;
+  object-fit: contain;
   transition: all 0.3s ease;
+}
+
+.app-link.play-store img {
+  height: 40px !important;
+  max-height: 40px !important;
 }
 
 .app-link:hover img {

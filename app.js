@@ -24,6 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       document.querySelector('.header').classList.remove('scrolled');
     }
+    
+    // Scroll Spy for Nav Links
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
   };
 
   // ===== Home Slider =====
@@ -94,23 +114,61 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ===== Price Calculator =====
-  window.updatePriceCalc = function() {
-    const calcEventType = document.getElementById('calc-event-type');
-    const calcGuestCount = document.getElementById('calc-guest-count');
-    const guestDisplay = document.getElementById('guest-display');
-    const estimatedCost = document.querySelector('.cost-amount');
+  const eventType = document.getElementById('event-type');
+  const guestCount = document.getElementById('guest-count');
+  const guestDisplay = document.getElementById('guest-display');
+  const eventDate = document.getElementById('event-date');
+  const estimatedCost = document.querySelector('.cost-amount');
+
+  if (eventType && guestCount && guestDisplay && eventDate && estimatedCost) {
+    // Update guest count display immediately on any change
+    guestCount.addEventListener('input', function() {
+      guestDisplay.textContent = this.value;
+      updateEstimate();
+    });
     
-    if (calcEventType && calcGuestCount && guestDisplay && estimatedCost) {
-      const basePrices = { wedding: 50, corporate: 40, birthday: 30, social: 35 };
-      const perPersonCost = basePrices[calcEventType.value] || 50;
-      const totalEstimate = perPersonCost * parseInt(calcGuestCount.value);
+    guestCount.addEventListener('change', function() {
+      guestDisplay.textContent = this.value;
+      updateEstimate();
+    });
+
+    // Update estimate when any input changes
+    eventType.addEventListener('change', updateEstimate);
+    eventDate.addEventListener('change', updateEstimate);
+
+    function updateEstimate() {
+      const basePrices = {
+        wedding: 5000,
+        corporate: 4000,
+        birthday: 3000,
+        social: 3500
+      };
       
-      estimatedCost.textContent = `$${totalEstimate.toLocaleString()}`;
-      guestDisplay.textContent = calcGuestCount.value;
+      const guestFactor = guestCount.value / 100;
+      const basePrice = basePrices[eventType.value] || 4000;
+      
+      // Add date premium (20% if within 3 months)
+      const today = new Date();
+      const selectedDate = new Date(eventDate.value);
+      const timeDiff = selectedDate - today;
+      const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+      
+      let datePremium = 1;
+      if (daysDiff < 90 && daysDiff > 0) {
+        datePremium = 1.2;
+      }
+      
+      // Calculate total estimate
+      const totalEstimate = basePrice * guestFactor * datePremium;
+      
+      // Update display
+      estimatedCost.textContent = `$${Math.round(totalEstimate).toLocaleString()}`;
     }
-  };
-  
-  setTimeout(() => { if (document.getElementById('calc-guest-count')) updatePriceCalc(); }, 100);
+
+    // Initialize estimate and display
+    guestDisplay.textContent = guestCount.value;
+    updateEstimate();
+  }
 
 
 
@@ -180,27 +238,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (isValid) {
-        // Here you would typically send the form data to a server
-        // For demo, we'll just show a success message
-        alert('Thank you for your inquiry! We will contact you shortly.');
-        contactForm.reset();
+        // Redirect to thank you page
+        window.location.href = 'thankyou.html';
       } else {
         alert('Please fill in all required fields correctly.');
       }
     });
   }
 
-  // ===== Video Review Modal =====
-  const videoReview = document.querySelector('.video-review');
-  if (videoReview) {
-    videoReview.addEventListener('click', function() {
-      // In a real implementation, this would open a modal with the video
-      alert('This would open a video testimonial in a modal or lightbox.');
-    });
-  }
 
   // ===== Current Year for Footer =====
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+  const currentYearElement = document.getElementById('current-year');
+  if (currentYearElement) {
+    currentYearElement.textContent = new Date().getFullYear();
+  }
 
   // ===== Scroll Reveal Animations =====
   // Using Intersection Observer for scroll animations

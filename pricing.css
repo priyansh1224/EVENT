@@ -1,0 +1,86 @@
+/* ===== Pricing Cards ===== */
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid #d63384;
+}
+
+.box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.box .title {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #212529;
+  font-weight: 700;
+}
+
+.box .price-amount {
+  font-size: 3.5rem;
+  color: #d63384;
+  margin-bottom: 2rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.box .price-amount sup {
+  font-size: 1.6rem;
+  vertical-align: super;
+}
+
+.box .price-amount small {
+  font-size: 1.4rem;
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.box ul {
+  margin-bottom: 2rem;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.box ul li {
+  font-size: 1.4rem;
+  padding: 0.8rem 0;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.box ul li i {
+  color: #d63384;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 992px) {
+  .box-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .box-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
