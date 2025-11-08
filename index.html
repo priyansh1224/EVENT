@@ -27,7 +27,7 @@
 
   <!--css file-->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="topbar.css" />
+  <link rel="stylesheet" href="component/topbar.css" />
   <link rel="stylesheet" href="hamburger.css" />
   <link rel="stylesheet" href="pricing.css" />
   <link rel="stylesheet" href="scroll-animations.css" />
@@ -797,12 +797,22 @@
         <h3>Subscribe to Our Newsletter</h3>
         <p>Get event planning tips, special offers, and inspiration delivered to your inbox.</p>
       </div>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email address">
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required>
         <button type="submit" class="btn btn-primary">Subscribe</button>
       </form>
     </div>
   </section>
+
+  <!-- Newsletter Success Popup -->
+  <div id="newsletter-popup" class="popup-overlay">
+    <div class="popup-content">
+      <i class="fas fa-check-circle popup-icon"></i>
+      <h3>Thank You for Subscribing!</h3>
+      <p>You've successfully subscribed to our newsletter. Stay tuned for exciting updates!</p>
+      <button class="btn btn-primary" onclick="closeNewsletterPopup()">Close</button>
+    </div>
+  </div>
 
   <!-- footer section starts  -->
   <footer class="footer">
@@ -891,10 +901,22 @@
     }
     updatePrice();
   </script>
+  <script>
+    // Newsletter popup
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('newsletter-popup').classList.add('active');
+      this.reset();
+    });
+    
+    function closeNewsletterPopup() {
+      document.getElementById('newsletter-popup').classList.remove('active');
+    }
+  </script>
   <script src="app.js"></script>
-  <script src="slider.js"></script>
-  <script src="background-slider.js"></script>
-  <script src="scroll-animations.js"></script>
+  <script src="component/slider.js"></script>
+  <script src="component/background-slider.js"></script>
+  <script src="component/scroll-animations.js"></script>
 </body>
 
 </html>
